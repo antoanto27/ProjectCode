@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
+<?php if ( ! defined('BASEPATH')) trigger_error('No direct script access allowed'); 
 
 /**
  * GUMP - A fast, extensible PHP input validation class

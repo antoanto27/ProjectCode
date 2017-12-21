@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) trigger_error('No direct script access allowed');
 
 require_once 'phpass-0.1/PasswordHash.php';
 
@@ -211,7 +211,7 @@ class Tank_auth
 			);
 
 			if ($email_activation) {
-				$data['new_email_key'] = md5(rand().microtime());
+				$data['new_email_key'] = password_hash($email_activation, PASSWORD_BCRYPT, array('cost' => 13));
 			}
 			if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
 				$data['user_id'] = $res['user_id'];
@@ -271,7 +271,7 @@ class Tank_auth
 				return $data;
 
 			} elseif ($this->ci->users->is_email_available($email)) {
-				$data['new_email_key'] = md5(rand().microtime());
+				$data['new_email_key'] = password_hash($email, PASSWORD_BCRYPT, array('cost' => 13));
 				$this->ci->users->set_new_email($user_id, $email, $data['new_email_key'], false);
 				$this->ci->users->set_new_email_users($user_id, $email, $data['new_email_key'], false);				return $data;
 
@@ -317,7 +317,7 @@ class Tank_auth
 					'user_id'		=> $user->id,
 					'username'		=> $user->username,
 					'email'			=> $user->email,
-					'new_pass_key'	=> md5(rand().microtime()),
+					'new_pass_key'	=> password_hash(rand().microtime(), PASSWORD_BCRYPT, array('cost' => 13)),
 				);
 
 				$this->ci->users->set_password_key($user->id, $data['new_pass_key']);
@@ -458,7 +458,7 @@ class Tank_auth
 					return $data;
 
 				} elseif ($this->ci->users->is_email_available($new_email)) {
-					$data['new_email_key'] = md5(rand().microtime());
+					$data['new_email_key'] = password_hash(rand().microtime(), PASSWORD_BCRYPT, array('cost' => 13));
 					$this->ci->users->set_new_email_users($user_id, $new_email, $data['new_email_key'], true);
 					return $data;
 
@@ -538,12 +538,13 @@ class Tank_auth
 	private function create_autologin($user_id)
 	{
 		$this->ci->load->helper('cookie');
-		$key = substr(md5(uniqid(rand().get_cookie($this->ci->config->item('sess_cookie_name')))), 0, 16);
+		$key = substr(password_hash(uniqid(rand.get_cookie($this->ci->config->item('sess_cookie_name')), PASSWORD_BCRYPT, array('cost' => 13))),0,16);
 
 		$this->ci->load->model('tank_auth/user_autologin');
 		$this->ci->user_autologin->purge($user_id);
 
-		if ($this->ci->user_autologin->set($user_id, md5($key))) {
+		if ($this->ci->user_autologin->set($user_id, password_hash($key, PASSWORD_BCRYPT, array('cost' => 13))));
+			{
 			set_cookie(array(
 					'name' 		=> $this->ci->config->item('autologin_cookie_name', 'tank_auth'),
 					'value'		=> serialize(array('user_id' => $user_id, 'key' => $key)),
@@ -567,7 +568,7 @@ class Tank_auth
 			$data = unserialize($cookie);
 
 			$this->ci->load->model('tank_auth/user_autologin');
-			$this->ci->user_autologin->delete($data['user_id'], md5($data['key']));
+			$this->ci->user_autologin->delete($data['user_id'],password_hash($data['key'], PASSWORD_BCRYPT, array('cost' => 13)));
 
 			delete_cookie($this->ci->config->item('autologin_cookie_name', 'tank_auth'));
 		}
@@ -590,7 +591,7 @@ class Tank_auth
 				if (isset($data['key']) and isset($data['user_id'])) {
 
 					$this->ci->load->model('tank_auth/user_autologin');
-					if (!is_null($user = $this->ci->user_autologin->get($data['user_id'], md5($data['key'])))) {
+					if (!is_null($user = $this->ci->user_autologin->get($data['user_id'],password_hash($plain_pass, PASSWORD_BCRYPT, array('cost' => 13))))) {
 
 						// Login user
 						$this->ci->session->set_userdata(array(

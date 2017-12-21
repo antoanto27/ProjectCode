@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('BASEPATH')) trigger_error('No direct script access allowed');
 
 // Set Default Time Zone as Nepal
 date_default_timezone_set('Asia/Kathmandu');

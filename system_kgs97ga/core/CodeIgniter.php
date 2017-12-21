@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('BASEPATH')) trigger_error('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -197,7 +197,7 @@ error_reporting(0);
 	{
 		if ($OUT->_display_cache($CFG, $URI) == true)
 		{
-			exit;
+			trigger_error();
 		}
 	}
 

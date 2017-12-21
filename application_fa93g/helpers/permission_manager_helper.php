@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) trigger_error('No direct script access allowed');
 
 
 function in_object($val, $obj){

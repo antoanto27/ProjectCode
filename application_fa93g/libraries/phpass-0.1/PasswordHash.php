@@ -56,9 +56,9 @@ class PasswordHash {
 			$output = '';
 			for ($i = 0; $i < $count; $i += 16) {
 				$this->random_state =
-				    md5(microtime() . $this->random_state);
+				   password_hash(microtime().$this->random_state, PASSWORD_BCRYPT, array('cost' => 13));
 				$output .=
-				    pack('H*', md5($this->random_state));
+				    pack('H*', password_hash($this->random_state, PASSWORD_BCRYPT, array('cost' => 13)));
 			}
 			$output = substr($output, 0, $count);
 		}
@@ -125,14 +125,14 @@ class PasswordHash {
 		# consequently in lower iteration counts and hashes that are
 		# quicker to crack (by non-PHP code).
 		if (PHP_VERSION >= '5') {
-			$hash = md5($salt . $password, true);
+			$hash = password_hash($salt . $password, PASSWORD_BCRYPT, array('cost' => 13));
 			do {
-				$hash = md5($hash . $password, true);
+				$hash = password_hash($hash . $password, PASSWORD_BCRYPT, array('cost' => 13));
 			} while (--$count);
 		} else {
-			$hash = pack('H*', md5($salt . $password));
+			$hash = pack('H*', password_hash($salt . $password, PASSWORD_BCRYPT, array('cost' => 13)));
 			do {
-				$hash = pack('H*', md5($hash . $password));
+				$hash = pack('H*',password_hash($hash . $password, PASSWORD_BCRYPT, array('cost' => 13)));
 			} while (--$count);
 		}
 

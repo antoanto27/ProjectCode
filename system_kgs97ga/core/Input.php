@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('BASEPATH')) trigger_error('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -729,7 +729,7 @@ class CI_Input {
 	{
 		if ( ! preg_match("/^[a-z0-9:_\/-]+$/i", $str))
 		{
-			exit('Disallowed Key Characters.');
+			trigger_error('Disallowed Key Characters.');
 		}
 
 		// Clean UTF-8 if supported

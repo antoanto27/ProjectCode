@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) trigger_error('No direct script access allowed');
 	
 	class Inventory extends CI_Controller 
 	{
@@ -105,7 +105,7 @@ HTML;
 										!</div>\n
 HTML;
 									echo $str1;
-									die();
+									trigger_error();
 								}								
 									// Everything is good!
 							}
