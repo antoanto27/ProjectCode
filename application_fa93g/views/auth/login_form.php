@@ -6,7 +6,7 @@ $login = array(
 	'maxlength'	=> 80,
 	'size'	=> 30,
 );
-if ($login_by_username AND $login_by_email) {
+if ($login_by_username and $login_by_email) {
 	$login_label = 'Email or login';
 } else if ($login_by_username) {
 	$login_label = 'Login';

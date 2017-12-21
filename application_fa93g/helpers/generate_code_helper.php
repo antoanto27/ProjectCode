@@ -39,7 +39,7 @@ if( !function_exists('generate_code') ){
 		$code .= '/';
 		$code .= sprintf("%02s", $nepDate['date']);
 		
-		$id = $CI->sharedDB_model->get($table, array('id'), NULL, 'id asc');
+		$id = $CI->sharedDB_model->get($table, array('id'), null, 'id asc');
 		
 		return $code;
 	}

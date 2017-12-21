@@ -25,7 +25,7 @@ class User_Autologin extends CI_Model
 
 	/**
 	 * Get user data for auto-logged in user.
-	 * Return NULL if given key or user ID is invalid.
+	 * Return null if given key or user ID is invalid.
 	 *
 	 * @param	int
 	 * @param	string
@@ -41,7 +41,7 @@ class User_Autologin extends CI_Model
 		$this->db->where($this->table_name.'.key_id', $key);
 		$query = $this->db->get();
 		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
+		return null;
 	}
 
 	/**

@@ -15,11 +15,11 @@ $config['webmaster_email'] = 'helloworld@aashishtripathee.com';
 | Security settings
 |
 | The library uses PasswordHash library for operating with hashed passwords.
-| 'phpass_hash_portable' = Can passwords be dumped and exported to another server. If set to FALSE then you won't be able to use this database on another server.
+| 'phpass_hash_portable' = Can passwords be dumped and exported to another server. If set to false then you won't be able to use this database on another server.
 | 'phpass_hash_strength' = Password hash strength.
 |--------------------------------------------------------------------------
 */
-$config['phpass_hash_portable'] = FALSE;
+$config['phpass_hash_portable'] = false;
 $config['phpass_hash_strength'] = 10;
 
 /*
@@ -30,7 +30,7 @@ $config['phpass_hash_strength'] = 10;
 | 'captcha_registration' = Registration uses CAPTCHA
 | 'email_activation' = Requires user to activate their account using email after registration.
 | 'email_activation_expire' = Time before users who don't activate their account getting deleted from database. Default is 48 hours (60*60*24*2).
-| 'email_account_details' = Email with account details is sent after registration (only when 'email_activation' is FALSE).
+| 'email_account_details' = Email with account details is sent after registration (only when 'email_activation' is false).
 | 'use_username' = Username is required or not.
 |
 | 'username_min_length' = Min length of user's username.
@@ -39,12 +39,12 @@ $config['phpass_hash_strength'] = 10;
 | 'password_max_length' = Max length of user's password.
 |--------------------------------------------------------------------------
 */
-$config['allow_registration'] = TRUE;
-$config['captcha_registration'] = TRUE;
-$config['email_activation'] = TRUE;
+$config['allow_registration'] = true;
+$config['captcha_registration'] = true;
+$config['email_activation'] = true;
 $config['email_activation_expire'] = 60*60*24*2;
-$config['email_account_details'] = TRUE;
-$config['use_username'] = TRUE;
+$config['email_account_details'] = true;
+$config['use_username'] = true;
 
 $config['username_min_length'] = 4;
 $config['username_max_length'] = 20;
@@ -57,8 +57,8 @@ $config['password_max_length'] = 50;
 |
 | 'login_by_username' = Username can be used to login.
 | 'login_by_email' = Email can be used to login.
-| You have to set at least one of 2 settings above to TRUE.
-| 'login_by_username' makes sense only when 'use_username' is TRUE.
+| You have to set at least one of 2 settings above to true.
+| 'login_by_username' makes sense only when 'use_username' is true.
 |
 | 'login_record_ip' = Save in database user IP address on user login.
 | 'login_record_time' = Save in database current time on user login.
@@ -68,11 +68,11 @@ $config['password_max_length'] = 50;
 | 'login_attempt_expire' = Time to live for every attempt to login. Default is 24 hours (60*60*24).
 |--------------------------------------------------------------------------
 */
-$config['login_by_username'] = TRUE;
-$config['login_by_email'] = TRUE;
-$config['login_record_ip'] = TRUE;
-$config['login_record_time'] = TRUE;
-$config['login_count_attempts'] = TRUE;
+$config['login_by_username'] = true;
+$config['login_by_email'] = true;
+$config['login_record_ip'] = true;
+$config['login_record_time'] = true;
+$config['login_count_attempts'] = true;
 $config['login_max_attempts'] = 5;
 $config['login_attempt_expire'] = 60*60*0.4;	// 20 minutes.
 
@@ -114,9 +114,9 @@ $config['captcha_fonts_path'] = 'captcha/fonts/5.ttf';
 $config['captcha_width'] = 200;
 $config['captcha_height'] = 50;
 $config['captcha_font_size'] = 14;
-$config['captcha_grid'] = FALSE;
+$config['captcha_grid'] = false;
 $config['captcha_expire'] = 180;
-$config['captcha_case_sensitive'] = TRUE;
+$config['captcha_case_sensitive'] = true;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,7 +126,7 @@ $config['captcha_case_sensitive'] = TRUE;
 | You can get reCAPTCHA keys by registering at http://recaptcha.net
 |--------------------------------------------------------------------------
 */
-$config['use_recaptcha'] = TRUE;
+$config['use_recaptcha'] = true;
 $config['recaptcha_public_key'] = '6LfIsckSAAAAAH47aklEoUuvGIzpZYVNW5mltT4n';
 $config['recaptcha_private_key'] = '6LfIsckSAAAAAHl4V0lkD8oru7cjWdoPA2Py2j6B';
 

@@ -9,7 +9,7 @@
 						$this->load->library('user_agent');
 				}
 				
-				public function get_inventory_i( $what, $condition, $limit = NULL, $orderBy = NULL ){
+				public function get_inventory_i( $what, $condition, $limit = null, $orderBy = null ){
 						$this->db->select(implode(',', $what));
 						$this->db->from('inventory');
 						

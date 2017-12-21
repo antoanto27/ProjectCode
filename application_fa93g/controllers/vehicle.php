@@ -204,7 +204,7 @@
 				
 				// Populate data
 				$data['title'] = 'Add Fuel Data'; 
-				$data['vehicles'] = $this->sharedDB_model->get('vehicles', array('id', 'name'), NULL, 'name ASC');
+				$data['vehicles'] = $this->sharedDB_model->get('vehicles', array('id', 'name'), null, 'name ASC');
 				
 				// Load libraries and helpers
 				$this->load->library('form_validation');

@@ -30,7 +30,7 @@ class Login_attempts extends CI_Model
 	 */
 	function get_attempts_num($ip_address, $login)
 	{
-		$this->db->select('1', FALSE);
+		$this->db->select('1', false);
 		$this->db->where('ip_address', $ip_address);
 		if (strlen($login) > 0) $this->db->or_where('login', $login);
 

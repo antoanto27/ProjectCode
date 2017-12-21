@@ -142,7 +142,7 @@ class Gump_validation
 	 * @param  array $data
 	 * @return array
 	 */
-	public function sanitize(array $input, $fields = NULL, $utf8_encode = true)
+	public function sanitize(array $input, $fields = null, $utf8_encode = true)
 	{
 		$magic_quotes = (bool)get_magic_quotes_gpc();
 		
@@ -163,12 +163,12 @@ class Gump_validation
 				
 				if(is_string($value))
 				{
-					if($magic_quotes === TRUE)
+					if($magic_quotes === true)
 					{
 						$value = stripslashes($value);
 					}
 					
-					if(strpos($value, "\r") !== FALSE)
+					if(strpos($value, "\r") !== false)
 					{
 						$value = trim($value);
 					}
@@ -224,10 +224,10 @@ class Gump_validation
 			$rules = explode('|', $rules);
 			foreach($rules as $rule)
 			{
-				$method = NULL;
-				$param  = NULL;
+				$method = null;
+				$param  = null;
 				
-				if(strstr($rule, ',') !== FALSE) // has params
+				if(strstr($rule, ',') !== false) // has params
 				{
 					$rule   = explode(',', $rule);
 					$method = 'validate_'.$rule[0];
@@ -254,7 +254,7 @@ class Gump_validation
 			}
 		}
 
-		return (count($this->errors) > 0)? $this->errors : TRUE;
+		return (count($this->errors) > 0)? $this->errors : true;
 	}
 	
 	/**
@@ -384,9 +384,9 @@ class Gump_validation
 
 			foreach($filters as $filter)
 			{	
-				$params = NULL;
+				$params = null;
 				
-				if(strstr($filter, ',') !== FALSE)
+				if(strstr($filter, ',') !== false)
 				{
 					$filter = explode(',', $filter);
 					
@@ -440,7 +440,7 @@ class Gump_validation
 			
 			$word = " $word "; // Normalize
 			
-			if(stripos($value, $word) !== FALSE)
+			if(stripos($value, $word) !== false)
 			{
 				$value = str_ireplace($word, chr(32), $value);
 			}
@@ -477,7 +477,7 @@ class Gump_validation
 	 * @return string
 	 */
 	/*
-	protected function filter_translate($value, $params = NULL)
+	protected function filter_translate($value, $params = null)
 	{
 		$input_lang  = 'en';
 		$output_lang = 'en';
@@ -615,7 +615,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_contains($field, $input, $param = NULL)
+	protected function validate_contains($field, $input, $param = null)
 	{
 		$param = trim(strtolower($param));
 		
@@ -649,7 +649,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_required($field, $input, $param = NULL)
+	protected function validate_required($field, $input, $param = null)
 	{
 		if(isset($input[$field]) && trim($input[$field]) != '')
 		{
@@ -659,7 +659,7 @@ class Gump_validation
 		{
 			return array(
 				'field' => $field,
-				'value' => NULL,
+				'value' => null,
 				'rule'	=> __FUNCTION__,
 				'param' => $param
 			);
@@ -676,7 +676,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_valid_email($field, $input, $param = NULL)
+	protected function validate_valid_email($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
@@ -704,7 +704,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_max_len($field, $input, $param = NULL)
+	protected function validate_max_len($field, $input, $param = null)
 	{
 		if(!isset($input[$field]))
 		{
@@ -744,7 +744,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_min_len($field, $input, $param = NULL)
+	protected function validate_min_len($field, $input, $param = null)
 	{
 		if(!isset($input[$field]))
 		{
@@ -784,7 +784,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_exact_len($field, $input, $param = NULL)
+	protected function validate_exact_len($field, $input, $param = null)
 	{
 		if(!isset($input[$field]))
 		{
@@ -824,14 +824,14 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_alpha($field, $input, $param = NULL)
+	protected function validate_alpha($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
 			return;
 		}
 		
-		if(!preg_match("/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ])+$/i", $input[$field]) !== FALSE)
+		if(!preg_match("/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ])+$/i", $input[$field]) !== false)
 		{
 			return array(
 				'field' => $field,
@@ -852,14 +852,14 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */	
-	protected function validate_alpha_numeric($field, $input, $param = NULL)
+	protected function validate_alpha_numeric($field, $input, $param = null)
 	{	
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
 			return;
 		}
 		
-		if(!preg_match("/^([a-z 0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ])+$/i", $input[$field]) !== FALSE)
+		if(!preg_match("/^([a-z 0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ])+$/i", $input[$field]) !== false)
 		{
 			return array(
 				'field' => $field,
@@ -880,14 +880,14 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_alpha_dash($field, $input, $param = NULL)
+	protected function validate_alpha_dash($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
 			return;
 		}
 		
-		if(!preg_match("/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ_-])+$/i", $input[$field]) !== FALSE)
+		if(!preg_match("/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ_-])+$/i", $input[$field]) !== false)
 		{
 			return array(
 				'field' => $field,
@@ -908,7 +908,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_numeric($field, $input, $param = NULL)
+	protected function validate_numeric($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
@@ -936,7 +936,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_integer($field, $input, $param = NULL)
+	protected function validate_integer($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
@@ -964,7 +964,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_boolean($field, $input, $param = NULL)
+	protected function validate_boolean($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
@@ -994,7 +994,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_float($field, $input, $param = NULL)
+	protected function validate_float($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
@@ -1022,7 +1022,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_valid_url($field, $input, $param = NULL)
+	protected function validate_valid_url($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
@@ -1050,7 +1050,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_url_exists($field, $input, $param = NULL)
+	protected function validate_url_exists($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
@@ -1097,14 +1097,14 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_valid_ip($field, $input, $param = NULL)
+	protected function validate_valid_ip($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
 			return;
 		}
 		
-		if(!filter_var($input[$field], FILTER_VALIDATE_IP) !== FALSE)
+		if(!filter_var($input[$field], FILTER_VALIDATE_IP) !== false)
 		{
 			return array(
 				'field' => $field,
@@ -1125,14 +1125,14 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_valid_ipv4($field, $input, $param = NULL)
+	protected function validate_valid_ipv4($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
 			return;
 		}
 		
-		if(!filter_var($input[$field], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== FALSE)
+		if(!filter_var($input[$field], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false)
 		{
 			return array(
 				'field' => $field,
@@ -1153,14 +1153,14 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_valid_ipv6($field, $input, $param = NULL)
+	protected function validate_valid_ipv6($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
 			return;
 		}
 		
-		if(!filter_var($input[$field], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== FALSE)
+		if(!filter_var($input[$field], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false)
 		{
 			return array(
 				'field' => $field,
@@ -1182,7 +1182,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_valid_cc($field, $input, $param = NULL)
+	protected function validate_valid_cc($field, $input, $param = null)
 	{
 		if(!isset($input[$field]) || empty($input[$field]))
 		{
@@ -1247,14 +1247,14 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_valid_name($field, $input, $param = NULL)
+	protected function validate_valid_name($field, $input, $param = null)
 	{
 		if(!isset($input[$field])|| empty($input[$field]))
 		{
 			return;
 		}
 		
-	    if(!preg_match("/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïñðòóôõöùúûüýÿ '-])+$/i", $input[$field]) !== FALSE)
+	    if(!preg_match("/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïñðòóôõöùúûüýÿ '-])+$/i", $input[$field]) !== false)
 	    {
 	        return array(
 	            'field' => $field,
@@ -1275,7 +1275,7 @@ class Gump_validation
 	 * @param  array $input
 	 * @return mixed
 	 */
-	protected function validate_street_address($field, $input, $param = NULL)
+	protected function validate_street_address($field, $input, $param = null)
 	{	
 		if(!isset($input[$field])|| empty($input[$field]))
 		{

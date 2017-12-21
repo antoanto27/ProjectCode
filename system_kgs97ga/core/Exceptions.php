@@ -88,7 +88,7 @@ class CI_Exceptions {
 	{
 		$severity = ( ! isset($this->levels[$severity])) ? $severity : $this->levels[$severity];
 
-		log_message('error', 'Severity: '.$severity.'  --> '.$message. ' '.$filepath.' '.$line, TRUE);
+		log_message('error', 'Severity: '.$severity.'  --> '.$message. ' '.$filepath.' '.$line, true);
 	}
 
 	// --------------------------------------------------------------------
@@ -101,7 +101,7 @@ class CI_Exceptions {
 	 * @param 	bool	log error yes/no
 	 * @return	string
 	 */
-	function show_404($page = '', $log_error = TRUE)
+	function show_404($page = '', $log_error = true)
 	{
 		$heading = "404 Page Not Found";
 		$message = "The page you requested was not found.";
@@ -169,7 +169,7 @@ class CI_Exceptions {
 		$filepath = str_replace("\\", "/", $filepath);
 
 		// For safety reasons we do not show the full file path
-		if (FALSE !== strpos($filepath, '/'))
+		if (false !== strpos($filepath, '/'))
 		{
 			$x = explode('/', $filepath);
 			$filepath = $x[count($x)-2].'/'.end($x);

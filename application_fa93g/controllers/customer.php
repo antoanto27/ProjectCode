@@ -29,8 +29,8 @@
             $this->load->model('sharedDB_model');
             // Populate the data array
             $data['title'] = 'Add Customer'; 
-            $data['customerType'] = $this->sharedDB_model->get('customer_type', array('id', 'name'), NULL, 'name ASC');
-            $data['gradeLevels'] = $this->sharedDB_model->get('grade_levels', array('id', 'name'), NULL, 'added_on ASC');
+            $data['customerType'] = $this->sharedDB_model->get('customer_type', array('id', 'name'), null, 'name ASC');
+            $data['gradeLevels'] = $this->sharedDB_model->get('grade_levels', array('id', 'name'), null, 'added_on ASC');
             // Load libraries and helpers
             $this->load->helper('url');
             // Load views

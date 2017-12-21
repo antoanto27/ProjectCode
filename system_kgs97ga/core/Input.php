@@ -33,39 +33,39 @@ class CI_Input {
 	 *
 	 * @var string
 	 */
-	var $ip_address				= FALSE;
+	var $ip_address				= false;
 	/**
 	 * user agent (web browser) being used by the current user
 	 *
 	 * @var string
 	 */
-	var $user_agent				= FALSE;
+	var $user_agent				= false;
 	/**
-	 * If FALSE, then $_GET will be set to an empty array
+	 * If false, then $_GET will be set to an empty array
 	 *
 	 * @var bool
 	 */
-	var $_allow_get_array		= TRUE;
+	var $_allow_get_array		= true;
 	/**
-	 * If TRUE, then newlines are standardized
+	 * If true, then newlines are standardized
 	 *
 	 * @var bool
 	 */
-	var $_standardize_newlines	= TRUE;
+	var $_standardize_newlines	= true;
 	/**
 	 * Determines whether the XSS filter is always active when GET, POST or COOKIE data is encountered
 	 * Set automatically based on config setting
 	 *
 	 * @var bool
 	 */
-	var $_enable_xss			= FALSE;
+	var $_enable_xss			= false;
 	/**
 	 * Enables a CSRF cookie token to be set.
 	 * Set automatically based on config setting
 	 *
 	 * @var bool
 	 */
-	var $_enable_csrf			= FALSE;
+	var $_enable_csrf			= false;
 	/**
 	 * List of all HTTP request headers
 	 *
@@ -87,15 +87,15 @@ class CI_Input {
 	{
 		log_message('debug', "Input Class Initialized");
 
-		$this->_allow_get_array	= (config_item('allow_get_array') === TRUE);
-		$this->_enable_xss		= (config_item('global_xss_filtering') === TRUE);
-		$this->_enable_csrf		= (config_item('csrf_protection') === TRUE);
+		$this->_allow_get_array	= (config_item('allow_get_array') === true);
+		$this->_enable_xss		= (config_item('global_xss_filtering') === true);
+		$this->_enable_csrf		= (config_item('csrf_protection') === true);
 
 		
 		$this->security =& $SEC;
 
 		// Do we need the UTF-8 class?
-		if (UTF8_ENABLED === TRUE)
+		if (UTF8_ENABLED === true)
 		{
 			
 			$this->uni =& $UNI;
@@ -118,14 +118,14 @@ class CI_Input {
 	 * @param	bool
 	 * @return	string
 	 */
-	function _fetch_from_array(&$array, $index = '', $xss_clean = FALSE)
+	function _fetch_from_array(&$array, $index = '', $xss_clean = false)
 	{
 		if ( ! isset($array[$index]))
 		{
-			return FALSE;
+			return false;
 		}
 
-		if ($xss_clean === TRUE)
+		if ($xss_clean === true)
 		{
 			return $this->security->xss_clean($array[$index]);
 		}
@@ -143,10 +143,10 @@ class CI_Input {
 	* @param	bool
 	* @return	string
 	*/
-	function get($index = NULL, $xss_clean = FALSE)
+	function get($index = null, $xss_clean = false)
 	{
 		// Check if a field has been provided
-		if ($index === NULL AND ! empty($_GET))
+		if ($index === null and ! empty($_GET))
 		{
 			$get = array();
 
@@ -171,10 +171,10 @@ class CI_Input {
 	* @param	bool
 	* @return	string
 	*/
-	function post($index = NULL, $xss_clean = FALSE)
+	function post($index = null, $xss_clean = false)
 	{
 		// Check if a field has been provided
-		if ($index === NULL AND ! empty($_POST))
+		if ($index === null and ! empty($_POST))
 		{
 			$post = array();
 
@@ -200,7 +200,7 @@ class CI_Input {
 	* @param	bool	XSS cleaning
 	* @return	string
 	*/
-	function get_post($index = '', $xss_clean = FALSE)
+	function get_post($index = '', $xss_clean = false)
 	{
 		if ( ! isset($_POST[$index]) )
 		{
@@ -222,7 +222,7 @@ class CI_Input {
 	* @param	bool
 	* @return	string
 	*/
-	function cookie($index = '', $xss_clean = FALSE)
+	function cookie($index = '', $xss_clean = false)
 	{
 		return $this->_fetch_from_array($_COOKIE, $index, $xss_clean);
 	}
@@ -245,7 +245,7 @@ class CI_Input {
 	* @param	bool	true makes the cookie secure
 	* @return	void
 	*/
-	function set_cookie($name = '', $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = FALSE)
+	function set_cookie($name = '', $value = '', $expire = '', $domain = '', $path = '/', $prefix = '', $secure = false)
 	{
 		if (is_array($name))
 		{
@@ -259,19 +259,19 @@ class CI_Input {
 			}
 		}
 
-		if ($prefix == '' AND config_item('cookie_prefix') != '')
+		if ($prefix == '' and config_item('cookie_prefix') != '')
 		{
 			$prefix = config_item('cookie_prefix');
 		}
-		if ($domain == '' AND config_item('cookie_domain') != '')
+		if ($domain == '' and config_item('cookie_domain') != '')
 		{
 			$domain = config_item('cookie_domain');
 		}
-		if ($path == '/' AND config_item('cookie_path') != '/')
+		if ($path == '/' and config_item('cookie_path') != '/')
 		{
 			$path = config_item('cookie_path');
 		}
-		if ($secure == FALSE AND config_item('cookie_secure') != FALSE)
+		if ($secure == false and config_item('cookie_secure') != false)
 		{
 			$secure = config_item('cookie_secure');
 		}
@@ -298,7 +298,7 @@ class CI_Input {
 	* @param	bool
 	* @return	string
 	*/
-	function server($index = '', $xss_clean = FALSE)
+	function server($index = '', $xss_clean = false)
 	{
 		return $this->_fetch_from_array($_SERVER, $index, $xss_clean);
 	}
@@ -312,7 +312,7 @@ class CI_Input {
 	*/
 	public function ip_address()
 	{
-		if ($this->ip_address !== FALSE)
+		if ($this->ip_address !== false)
 		{
 			return $this->ip_address;
 		}
@@ -323,12 +323,12 @@ class CI_Input {
 			$proxy_ips = explode(',', str_replace(' ', '', $proxy_ips));
 			foreach (array('HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP', 'HTTP_X_CLIENT_IP', 'HTTP_X_CLUSTER_CLIENT_IP') as $header)
 			{
-				if (($spoof = $this->server($header)) !== FALSE)
+				if (($spoof = $this->server($header)) !== false)
 				{
 					// Some proxies typically list the whole chain of IP
 					// addresses through which the client has reached us.
 					// e.g. client_ip, proxy_ip1, proxy_ip2, etc.
-					if (strpos($spoof, ',') !== FALSE)
+					if (strpos($spoof, ',') !== false)
 					{
 						$spoof = explode(',', $spoof, 2);
 						$spoof = $spoof[0];
@@ -336,7 +336,7 @@ class CI_Input {
 
 					if ( ! $this->valid_ip($spoof))
 					{
-						$spoof = FALSE;
+						$spoof = false;
 					}
 					else
 					{
@@ -345,7 +345,7 @@ class CI_Input {
 				}
 			}
 
-			$this->ip_address = ($spoof !== FALSE && in_array($_SERVER['REMOTE_ADDR'], $proxy_ips, TRUE))
+			$this->ip_address = ($spoof !== false && in_array($_SERVER['REMOTE_ADDR'], $proxy_ips, true))
 				? $spoof : $_SERVER['REMOTE_ADDR'];
 		}
 		else
@@ -395,17 +395,17 @@ class CI_Input {
 
 		if ($which !== 'ipv6' && $which !== 'ipv4')
 		{
-			if (strpos($ip, ':') !== FALSE)
+			if (strpos($ip, ':') !== false)
 			{
 				$which = 'ipv6';
 			}
-			elseif (strpos($ip, '.') !== FALSE)
+			elseif (strpos($ip, '.') !== false)
 			{
 				$which = 'ipv4';
 			}
 			else
 			{
-				return FALSE;
+				return false;
 			}
 		}
 
@@ -431,12 +431,12 @@ class CI_Input {
 		// Always 4 segments needed
 		if (count($ip_segments) !== 4)
 		{
-			return FALSE;
+			return false;
 		}
 		// IP can not start with 0
 		if ($ip_segments[0][0] == '0')
 		{
-			return FALSE;
+			return false;
 		}
 
 		// Check each segment
@@ -444,13 +444,13 @@ class CI_Input {
 		{
 			// IP segments must be digits and can not be
 			// longer than 3 digits or greater then 255
-			if ($segment == '' OR preg_match("/[^0-9]/", $segment) OR $segment > 255 OR strlen($segment) > 3)
+			if ($segment == '' or preg_match("/[^0-9]/", $segment) or $segment > 255 or strlen($segment) > 3)
 			{
-				return FALSE;
+				return false;
 			}
 		}
 
-		return TRUE;
+		return true;
 	}
 
 	// --------------------------------------------------------------------
@@ -469,26 +469,26 @@ class CI_Input {
 		// one set of consecutive 0 groups can be collapsed to ::
 
 		$groups = 8;
-		$collapsed = FALSE;
+		$collapsed = false;
 
 		$chunks = array_filter(
-			preg_split('/(:{1,2})/', $str, NULL, PREG_SPLIT_DELIM_CAPTURE)
+			preg_split('/(:{1,2})/', $str, null, PREG_SPLIT_DELIM_CAPTURE)
 		);
 
 		// Rule out easy nonsense
-		if (current($chunks) == ':' OR end($chunks) == ':')
+		if (current($chunks) == ':' or end($chunks) == ':')
 		{
-			return FALSE;
+			return false;
 		}
 
 		// PHP supports IPv4-mapped IPv6 addresses, so we'll expect those as well
-		if (strpos(end($chunks), '.') !== FALSE)
+		if (strpos(end($chunks), '.') !== false)
 		{
 			$ipv4 = array_pop($chunks);
 
 			if ( ! $this->_valid_ipv4($ipv4))
 			{
-				return FALSE;
+				return false;
 			}
 
 			$groups--;
@@ -500,31 +500,31 @@ class CI_Input {
 			{
 				if (--$groups == 0)
 				{
-					return FALSE;	// too many groups
+					return false;	// too many groups
 				}
 
 				if (strlen($seg) > 2)
 				{
-					return FALSE;	// long separator
+					return false;	// long separator
 				}
 
 				if ($seg == '::')
 				{
 					if ($collapsed)
 					{
-						return FALSE;	// multiple collapsed
+						return false;	// multiple collapsed
 					}
 
-					$collapsed = TRUE;
+					$collapsed = true;
 				}
 			}
-			elseif (preg_match("/[^0-9a-f]/i", $seg) OR strlen($seg) > 4)
+			elseif (preg_match("/[^0-9a-f]/i", $seg) or strlen($seg) > 4)
 			{
-				return FALSE; // invalid segment
+				return false; // invalid segment
 			}
 		}
 
-		return $collapsed OR $groups == 1;
+		return $collapsed or $groups == 1;
 	}
 
 	// --------------------------------------------------------------------
@@ -537,12 +537,12 @@ class CI_Input {
 	*/
 	function user_agent()
 	{
-		if ($this->user_agent !== FALSE)
+		if ($this->user_agent !== false)
 		{
 			return $this->user_agent;
 		}
 
-		$this->user_agent = ( ! isset($_SERVER['HTTP_USER_AGENT'])) ? FALSE : $_SERVER['HTTP_USER_AGENT'];
+		$this->user_agent = ( ! isset($_SERVER['HTTP_USER_AGENT'])) ? false : $_SERVER['HTTP_USER_AGENT'];
 
 		return $this->user_agent;
 	}
@@ -596,13 +596,13 @@ class CI_Input {
 		}
 
 		// Is $_GET data allowed? If not we'll set the $_GET to an empty array
-		if ($this->_allow_get_array == FALSE)
+		if ($this->_allow_get_array == false)
 		{
 			$_GET = array();
 		}
 		else
 		{
-			if (is_array($_GET) AND count($_GET) > 0)
+			if (is_array($_GET) and count($_GET) > 0)
 			{
 				foreach ($_GET as $key => $val)
 				{
@@ -612,7 +612,7 @@ class CI_Input {
 		}
 
 		// Clean $_POST Data
-		if (is_array($_POST) AND count($_POST) > 0)
+		if (is_array($_POST) and count($_POST) > 0)
 		{
 			foreach ($_POST as $key => $val)
 			{
@@ -621,7 +621,7 @@ class CI_Input {
 		}
 
 		// Clean $_COOKIE Data
-		if (is_array($_COOKIE) AND count($_COOKIE) > 0)
+		if (is_array($_COOKIE) and count($_COOKIE) > 0)
 		{
 			// Also get rid of specially treated cookies that might be set by a server
 			// or silly application, that are of no use to a CI application anyway
@@ -643,7 +643,7 @@ class CI_Input {
 
 
 		// CSRF Protection check on HTTP requests
-		if ($this->_enable_csrf == TRUE && ! $this->is_cli_request())
+		if ($this->_enable_csrf == true && ! $this->is_cli_request())
 		{
 			$this->security->csrf_verify();
 		}
@@ -686,7 +686,7 @@ class CI_Input {
 		}
 
 		// Clean UTF-8 if supported
-		if (UTF8_ENABLED === TRUE)
+		if (UTF8_ENABLED === true)
 		{
 			$str = $this->uni->clean_string($str);
 		}
@@ -695,15 +695,15 @@ class CI_Input {
 		$str = remove_invisible_characters($str);
 
 		// Should we filter the input data?
-		if ($this->_enable_xss === TRUE)
+		if ($this->_enable_xss === true)
 		{
 			$str = $this->security->xss_clean($str);
 		}
 
 		// Standardize newlines if needed
-		if ($this->_standardize_newlines == TRUE)
+		if ($this->_standardize_newlines == true)
 		{
-			if (strpos($str, "\r") !== FALSE)
+			if (strpos($str, "\r") !== false)
 			{
 				$str = str_replace(array("\r\n", "\r", "\r\n\n"), PHP_EOL, $str);
 			}
@@ -733,7 +733,7 @@ class CI_Input {
 		}
 
 		// Clean UTF-8 if supported
-		if (UTF8_ENABLED === TRUE)
+		if (UTF8_ENABLED === true)
 		{
 			$str = $this->uni->clean_string($str);
 		}
@@ -753,7 +753,7 @@ class CI_Input {
 	 *
 	 * @return array
 	 */
-	public function request_headers($xss_clean = FALSE)
+	public function request_headers($xss_clean = false)
 	{
 		// Look at Apache go!
 		if (function_exists('apache_request_headers'))
@@ -796,9 +796,9 @@ class CI_Input {
 	 *
 	 * @param 	string		array key for $this->headers
 	 * @param	boolean		XSS Clean or not
-	 * @return 	mixed		FALSE on failure, string on success
+	 * @return 	mixed		false on failure, string on success
 	 */
-	public function get_request_header($index, $xss_clean = FALSE)
+	public function get_request_header($index, $xss_clean = false)
 	{
 		if (empty($this->headers))
 		{
@@ -807,10 +807,10 @@ class CI_Input {
 
 		if ( ! isset($this->headers[$index]))
 		{
-			return FALSE;
+			return false;
 		}
 
-		if ($xss_clean === TRUE)
+		if ($xss_clean === true)
 		{
 			return $this->security->xss_clean($this->headers[$index]);
 		}
@@ -843,7 +843,7 @@ class CI_Input {
 	 */
 	public function is_cli_request()
 	{
-		return (php_sapi_name() === 'cli' OR defined('STDIN'));
+		return (php_sapi_name() === 'cli' or defined('STDIN'));
 	}
 
 }

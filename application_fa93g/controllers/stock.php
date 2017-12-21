@@ -31,9 +31,9 @@
 					
 					// Populate the data array
 					$data['title'] = 'Add Stock'; 
-					$data['inventory'] = $this->sharedDB_model->get('inventory', array('id', 'name'), NULL, 'name ASC'); 
-					$data['warehouse'] = $this->sharedDB_model->get('warehouse', array('id', 'name'), NULL, 'name ASC'); 
-					$data['suppliers'] = $this->sharedDB_model->get('suppliers', array('id', 'name'), NULL, 'name ASC'); 
+					$data['inventory'] = $this->sharedDB_model->get('inventory', array('id', 'name'), null, 'name ASC'); 
+					$data['warehouse'] = $this->sharedDB_model->get('warehouse', array('id', 'name'), null, 'name ASC'); 
+					$data['suppliers'] = $this->sharedDB_model->get('suppliers', array('id', 'name'), null, 'name ASC'); 
 					
 					// Load libraries and helpers
 					$this->load->helper('url');

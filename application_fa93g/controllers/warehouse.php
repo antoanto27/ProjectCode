@@ -49,8 +49,8 @@
 			// Validation
 			
 			// Load model
-			$this->load->model('Shared_DB','',TRUE);
-			$this->load->model('Warehouse','',TRUE);
+			$this->load->model('Shared_DB','',true);
+			$this->load->model('Warehouse','',true);
 			
 			// Get data
 			return $this->warehouse_model->get_warehouse( $condition );

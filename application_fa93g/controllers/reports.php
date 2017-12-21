@@ -34,7 +34,7 @@
 					
 					// Populate data
 					$data['title'] = 'Stocks Report'; 
-					$allInventory = $this->sharedDB_model->get('inventory', array('id', 'code', 'name', 'added_on'), NULL, 'name ASC'); 
+					$allInventory = $this->sharedDB_model->get('inventory', array('id', 'code', 'name', 'added_on'), null, 'name ASC'); 
 					
 					$inventories = array();
 					foreach($allInventory as $inventory)
@@ -87,7 +87,7 @@
 					
 					// Populate data
 					$data['title'] = 'Stocks Report'; 
-					$allInventory = $this->sharedDB_model->get('inventory', array('id', 'code', 'name', 'added_on'), NULL, 'name ASC'); 
+					$allInventory = $this->sharedDB_model->get('inventory', array('id', 'code', 'name', 'added_on'), null, 'name ASC'); 
 					
 					$inventories = array();
 					foreach($allInventory as $inventory)
@@ -149,8 +149,8 @@
 					$from = $this->input->post('from');
 					$to = $this->input->post('to');
 					
-					// VALIDATE. AND SANITIZE.
-					// VALIDATE. AND SANITIZE.
+					// VALIDATE. and SANITIZE.
+					// VALIDATE. and SANITIZE.
 					
 					// Libraries
 					$this->load->library('dateconverter');
@@ -158,8 +158,8 @@
 					$from = $this->input->post('from');
 					$to = $this->input->post('to');
 					
-					// VALIDATE. AND SANITIZE.
-					// VALIDATE. AND SANITIZE.
+					// VALIDATE. and SANITIZE.
+					// VALIDATE. and SANITIZE.
 					
 					$from = explode('-', $from);
 					$to = explode('-', $to);
@@ -269,7 +269,7 @@ HTML;
 			{
 				$customerName = $this->input->post('customer');
 				
-				// VALIDATE. AND SANITIZE.
+				// VALIDATE. and SANITIZE.
 				
 				// Libraries
 				$this->load->library('dateconverter');
@@ -277,8 +277,8 @@ HTML;
 				$from = $this->input->post('from');
 				$to = $this->input->post('to');
 				
-				// VALIDATE. AND SANITIZE.
-				// VALIDATE. AND SANITIZE.
+				// VALIDATE. and SANITIZE.
+				// VALIDATE. and SANITIZE.
 				
 				$from = explode('-', $from);
 				$to = explode('-', $to);
@@ -452,8 +452,8 @@ HTML;
 					// Populate data
 					$data['title'] = 'Customers Transaction Report';
 					
-					$allCustomerTypes = $this->sharedDB_model->get('customer_type', array('id', 'name'), NULL);
-					$allGradeLevels = $this->sharedDB_model->get('grade_levels', array('id', 'name'), NULL, 'added_on asc');
+					$allCustomerTypes = $this->sharedDB_model->get('customer_type', array('id', 'name'), null);
+					$allGradeLevels = $this->sharedDB_model->get('grade_levels', array('id', 'name'), null, 'added_on asc');
 				
 					$data['allCustomerTypes'] = $allCustomerTypes;
 					$data['allGradeLevels'] = $allGradeLevels;
@@ -492,8 +492,8 @@ HTML;
 					
 					$gradeLevel = ($customerType == $studentCustomer) ? $gradeLevel = $this->input->post('gradeLevel') : $gradeLevel = 0;
 					
-					// VALIDATE. AND SANITIZE.
-					// VALIDATE. AND SANITIZE.
+					// VALIDATE. and SANITIZE.
+					// VALIDATE. and SANITIZE.
 					
 					$from = explode('-', $from);
 					$to = explode('-', $to);
@@ -508,10 +508,10 @@ HTML;
 					
 					/*
 					 * Check the customer type.
-					 * If it's all, have a NULL condition for the SQL query.
+					 * If it's all, have a null condition for the SQL query.
 					 * 
 					 */
-					$allCstmrs = ($customerType == -1) ? $this->sharedDB_model->get('customers', array('id', 'code', 'reg_number', 'alternate_id', 'name', 'grade_level'), NULL, 'grade_level asc, name asc') : $this->sharedDB_model->get('customers', array('id', 'code', 'reg_number', 'alternate_id', 'name', 'grade_level'), array('type' => $customerType, 'grade_level' => $gradeLevel), 'grade_level asc, name asc');
+					$allCstmrs = ($customerType == -1) ? $this->sharedDB_model->get('customers', array('id', 'code', 'reg_number', 'alternate_id', 'name', 'grade_level'), null, 'grade_level asc, name asc') : $this->sharedDB_model->get('customers', array('id', 'code', 'reg_number', 'alternate_id', 'name', 'grade_level'), array('type' => $customerType, 'grade_level' => $gradeLevel), 'grade_level asc, name asc');
 										
 					$allCustomers = array();
 					foreach($allCstmrs as $currentCustomer)
@@ -592,8 +592,8 @@ HTML;
 				$studentCustomer = $studentCustomer[0]['id'];
 				$gradeLevel = ($customerType == $studentCustomer) ? $gradeLevel = $this->input->post('gradeLevel') : $gradeLevel = 0;
 				
-				// VALIDATE. AND SANITIZE.
-				// VALIDATE. AND SANITIZE.
+				// VALIDATE. and SANITIZE.
+				// VALIDATE. and SANITIZE.
 				
 				$from = explode('-', $from);
 				$to = explode('-', $to);
@@ -608,10 +608,10 @@ HTML;
 				
 				/*
 				 * Check the customer type.
-				 * If it's all, have a NULL condition for the SQL query.
+				 * If it's all, have a null condition for the SQL query.
 				 * 
 				 */
-				$allCstmrs = ($customerType == -1) ? $this->sharedDB_model->get('customers', array('id', 'code', 'reg_number', 'alternate_id', 'name', 'grade_level'), NULL, 'grade_level asc, name asc') : $this->sharedDB_model->get('customers', array('id', 'code', 'reg_number', 'alternate_id', 'name', 'grade_level'), array('type' => $customerType, 'grade_level' => $gradeLevel), 'grade_level asc, name asc');
+				$allCstmrs = ($customerType == -1) ? $this->sharedDB_model->get('customers', array('id', 'code', 'reg_number', 'alternate_id', 'name', 'grade_level'), null, 'grade_level asc, name asc') : $this->sharedDB_model->get('customers', array('id', 'code', 'reg_number', 'alternate_id', 'name', 'grade_level'), array('type' => $customerType, 'grade_level' => $gradeLevel), 'grade_level asc, name asc');
 				
 				$allCustomers = array();
 				foreach($allCstmrs as $currentCustomer)

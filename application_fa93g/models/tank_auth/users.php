@@ -38,7 +38,7 @@ class Users extends CI_Model
 
 		$query = $this->db->get($this->table_name);
 		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
+		return null;
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Users extends CI_Model
 
 		$query = $this->db->get($this->table_name);
 		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
+		return null;
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Users extends CI_Model
 
 		$query = $this->db->get($this->table_name);
 		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
+		return null;
 	}
 
 	/**
@@ -84,7 +84,7 @@ class Users extends CI_Model
 
 		$query = $this->db->get($this->table_name);
 		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
+		return null;
 	}
 
 	/**
@@ -95,7 +95,7 @@ class Users extends CI_Model
 	 */
 	function is_username_available($username)
 	{
-		$this->db->select('1', FALSE);
+		$this->db->select('1', false);
 		$this->db->where('LOWER(username)=', strtolower($username));
 
 		$query = $this->db->get($this->table_name);
@@ -110,7 +110,7 @@ class Users extends CI_Model
 	 */
 	function is_email_available($email)
 	{
-		$this->db->select('1', FALSE);
+		$this->db->select('1', false);
 		$this->db->where('LOWER(email)=', strtolower($email));
 		$this->db->or_where('LOWER(new_email)=', strtolower($email));
 
@@ -125,7 +125,7 @@ class Users extends CI_Model
 	 * @param	bool
 	 * @return	array
 	 */
-	function create_user($data, $activated = TRUE)
+	function create_user($data, $activated = true)
 	{
 		$data['created'] = date('Y-m-d H:i:s');
 		$data['activated'] = $activated ? 1 : 0;
@@ -135,7 +135,7 @@ class Users extends CI_Model
 			if ($activated)	$this->create_profile($user_id);
 			return array('user_id' => $user_id);
 		}
-		return NULL;
+		return null;
 	}
 
 	/**
@@ -149,7 +149,7 @@ class Users extends CI_Model
 	 */
 	function activate_user($user_id, $activation_key, $activate_by_email)
 	{
-		$this->db->select('1', FALSE);
+		$this->db->select('1', false);
 		$this->db->where('id', $user_id);
 		if ($activate_by_email) {
 			$this->db->where('new_email_key', $activation_key);
@@ -162,14 +162,14 @@ class Users extends CI_Model
 		if ($query->num_rows() == 1) {
 
 			$this->db->set('activated', 1);
-			$this->db->set('new_email_key', NULL);
+			$this->db->set('new_email_key', null);
 			$this->db->where('id', $user_id);
 			$this->db->update($this->table_name);
 
 			$this->create_profile($user_id);
-			return TRUE;
+			return true;
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -197,9 +197,9 @@ class Users extends CI_Model
 		$this->db->delete($this->table_name);
 		if ($this->db->affected_rows() > 0) {
 			$this->delete_profile($user_id);
-			return TRUE;
+			return true;
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -230,7 +230,7 @@ class Users extends CI_Model
 	 */
 	function can_reset_password_users($user_id, $new_pass_key, $expire_period = 900)
 	{
-		$this->db->select('1', FALSE);
+		$this->db->select('1', false);
 		$this->db->where('id', $user_id);
 		$this->db->where('new_password_key', $new_pass_key);
 		$this->db->where('UNIX_TIMESTAMP(new_password_requested) >', time() - $expire_period);
@@ -251,8 +251,8 @@ class Users extends CI_Model
 	function reset_password_users($user_id, $new_pass, $new_pass_key, $expire_period = 900)
 	{
 		$this->db->set('password', $new_pass);
-		$this->db->set('new_password_key', NULL);
-		$this->db->set('new_password_requested', NULL);
+		$this->db->set('new_password_key', null);
+		$this->db->set('new_password_requested', null);
 		$this->db->where('id', $user_id);
 		$this->db->where('new_password_key', $new_pass_key);
 		$this->db->where('UNIX_TIMESTAMP(new_password_requested) >=', time() - $expire_period);
@@ -307,9 +307,9 @@ class Users extends CI_Model
 	 */
 	function activate_new_email($user_id, $new_email_key)
 	{
-		$this->db->set('email', 'new_email', FALSE);
-		$this->db->set('new_email', NULL);
-		$this->db->set('new_email_key', NULL);
+		$this->db->set('email', 'new_email', false);
+		$this->db->set('new_email', null);
+		$this->db->set('new_email_key', null);
 		$this->db->where('id', $user_id);
 		$this->db->where('new_email_key', $new_email_key);
 
@@ -328,8 +328,8 @@ class Users extends CI_Model
 	 */
 	function update_login_info($user_id, $record_ip, $record_time)
 	{
-		$this->db->set('new_password_key', NULL);
-		$this->db->set('new_password_requested', NULL);
+		$this->db->set('new_password_key', null);
+		$this->db->set('new_password_requested', null);
 
 		if ($record_ip)		$this->db->set('last_ip', $this->input->ip_address());
 		if ($record_time)	$this->db->set('last_login', date('Y-m-d H:i:s'));
@@ -345,7 +345,7 @@ class Users extends CI_Model
 	 * @param	string
 	 * @return	void
 	 */
-	function ban_user($user_id, $reason = NULL)
+	function ban_user($user_id, $reason = null)
 	{
 		$this->db->where('id', $user_id);
 		$this->db->update($this->table_name, array(
@@ -365,7 +365,7 @@ class Users extends CI_Model
 		$this->db->where('id', $user_id);
 		$this->db->update($this->table_name, array(
 			'banned'		=> 0,
-			'ban_reason'	=> NULL,
+			'ban_reason'	=> null,
 		));
 	}
 

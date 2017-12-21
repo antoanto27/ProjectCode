@@ -33,11 +33,11 @@ class Auth extends CI_Controller
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 			redirect('');
 
-		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
+		} elseif ($this->tank_auth->is_logged_in(false)) {						// logged in, not activated
 			redirect('/auth/send_again/');
 
 		} else {
-			$data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
+			$data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') and
 					$this->config->item('use_username', 'tank_auth'));
 			$data['login_by_email'] = $this->config->item('login_by_email', 'tank_auth');
 
@@ -46,7 +46,7 @@ class Auth extends CI_Controller
 			$this->form_validation->set_rules('remember', 'Remember me', 'integer');
 
 			// Get login for counting attempts to login
-			if ($this->config->item('login_count_attempts', 'tank_auth') AND
+			if ($this->config->item('login_count_attempts', 'tank_auth') and
 					($login = $this->input->post('login'))) {
 				$login = $this->security->xss_clean($login);
 			} else {
@@ -84,9 +84,9 @@ class Auth extends CI_Controller
 					}
 				}
 			}
-			$data['show_captcha'] = FALSE;
+			$data['show_captcha'] = false;
 			if ($this->tank_auth->is_max_login_attempts_exceeded($login)) {
-				$data['show_captcha'] = TRUE;
+				$data['show_captcha'] = true;
 				if ($data['use_recaptcha']) {
 					$data['recaptcha_html'] = $this->_create_recaptcha();
 				} else {
@@ -122,7 +122,7 @@ class Auth extends CI_Controller
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 			//redirect('');
 
-		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
+		} elseif ($this->tank_auth->is_logged_in(false)) {						// logged in, not activated
 			//redirect('/auth/send_again/');
 
 		} elseif (!$this->config->item('allow_registration', 'tank_auth')) {	// registration is off
@@ -204,7 +204,7 @@ class Auth extends CI_Controller
 	 */
 	function send_again()
 	{
-		if (!$this->tank_auth->is_logged_in(FALSE)) {							// not logged in or activated
+		if (!$this->tank_auth->is_logged_in(false)) {							// not logged in or activated
 			redirect('/auth/login/');
 
 		} else {
@@ -264,7 +264,7 @@ class Auth extends CI_Controller
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 			redirect('');
 
-		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
+		} elseif ($this->tank_auth->is_logged_in(false)) {						// logged in, not activated
 			redirect('/auth/send_again/');
 
 		} else {
@@ -327,7 +327,7 @@ class Auth extends CI_Controller
 		} else {
 			// Try to activate user by password key (if not activated yet)
 			if ($this->config->item('email_activation', 'tank_auth')) {
-				$this->tank_auth->activate_user($user_id, $new_pass_key, FALSE);
+				$this->tank_auth->activate_user($user_id, $new_pass_key, false);
 			}
 
 			if (!$this->tank_auth->can_reset_password($user_id, $new_pass_key)) {
@@ -491,8 +491,8 @@ class Auth extends CI_Controller
 		$this->email->reply_to($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
 		$this->email->to($email);
 		$this->email->subject(sprintf($this->lang->line('auth_subject_'.$type), $this->config->item('website_name', 'tank_auth')));
-		$this->email->message($this->load->view('email/'.$type.'-html', $data, TRUE));
-		$this->email->set_alt_message($this->load->view('email/'.$type.'-txt', $data, TRUE));
+		$this->email->message($this->load->view('email/'.$type.'-html', $data, true));
+		$this->email->set_alt_message($this->load->view('email/'.$type.'-txt', $data, true));
 		$this->email->send();
 	}
 
@@ -541,15 +541,15 @@ class Auth extends CI_Controller
 
 		if ($now - $time > $this->config->item('captcha_expire', 'tank_auth')) {
 			$this->form_validation->set_message('_check_captcha', $this->lang->line('auth_captcha_expired'));
-			return FALSE;
+			return false;
 
-		} elseif (($this->config->item('captcha_case_sensitive', 'tank_auth') AND
-				$code != $word) OR
+		} elseif (($this->config->item('captcha_case_sensitive', 'tank_auth') and
+				$code != $word) or
 				strtolower($code) != strtolower($word)) {
 			$this->form_validation->set_message('_check_captcha', $this->lang->line('auth_incorrect_captcha'));
-			return FALSE;
+			return false;
 		}
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -586,9 +586,9 @@ class Auth extends CI_Controller
 
 		if (!$resp->is_valid) {
 			$this->form_validation->set_message('_check_recaptcha', $this->lang->line('auth_incorrect_captcha'));
-			return FALSE;
+			return false;
 		}
-		return TRUE;
+		return true;
 	}
 
 }

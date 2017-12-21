@@ -200,7 +200,7 @@ jQuery.fn = jQuery.prototype = {
 		return core_slice.call( this );
 	},
 
-	// Get the Nth element in the matched element set OR
+	// Get the Nth element in the matched element set or
 	// Get the whole matched element set as a clean array
 	get: function( num ) {
 		return num == null ?

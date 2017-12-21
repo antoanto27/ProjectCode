@@ -87,7 +87,7 @@
 					
 					$this->load->model('inventory_model');
 					
-					$details = $this->inventory_model->get_inventory_i(array('inventory.id', 'inventory.name'), array('inventory.name' => $name), NULL,  'inventory.added_on desc');
+					$details = $this->inventory_model->get_inventory_i(array('inventory.id', 'inventory.name'), array('inventory.name' => $name), null,  'inventory.added_on desc');
 					$details = $details[0];
 					$customerType = $this->sharedDB_model->get('customers', array('type'), array('name' => $customer));
 					$customerType = $customerType[0]['type'];
@@ -122,7 +122,7 @@
 					}
 					else
 					{
-							$latestStock = NULL;
+							$latestStock = null;
 					}
 					
 					// Bind the selling price of the latest stock we've got to the inventory array we've got above.
@@ -187,8 +187,8 @@
 					
 					// GET PAYMENT TYPE AS WELL
 					
-					// VALIDATE. AND SANITIZE
-					// VALIDATE. AND SANITIZE
+					// VALIDATE. and SANITIZE
+					// VALIDATE. and SANITIZE
 					
 					$customerDetails = $this->sharedDB_model->get('customers', array('id', 'code', 'reg_number', 'alternate_id', 'name', 'type'), array('id' => $customerID));
 					$customerDetails = $customerDetails[0];

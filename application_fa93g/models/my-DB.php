@@ -6,7 +6,7 @@ class non_utilizzata{
 			$this->load->library('user_agent');
 		}
 		
-		public function get($what = array( '*' ), $condition = NULL, $orderBy = NULL, $limit = NULL){
+		public function get($what = array( '*' ), $condition = null, $orderBy = null, $limit = null){
 			$this->db->select(implode(',', $what));
 			if($condition) { $this->db->where($condition); }	// Can use something like 'id !=' => 2
 			if($orderBy){ $this->db->order_by($orderBy); }

@@ -14,7 +14,7 @@ $ok = 0;
 
 # Try to use stronger but system-specific hashes, with a possible fallback to
 # the weaker portable hashes.
-$t_hasher = new PasswordHash(8, FALSE);
+$t_hasher = new PasswordHash(8, false);
 
 $correct = "test12345";
 $hash = $t_hasher->HashPassword($correct);
@@ -33,7 +33,7 @@ print "Check wrong: '" . $check . "' (should be '0' or '')\n";
 unset($t_hasher);
 
 # Force the use of weaker portable hashes.
-$t_hasher = new PasswordHash(8, TRUE);
+$t_hasher = new PasswordHash(8, true);
 
 $hash = $t_hasher->HashPassword($correct);
 
