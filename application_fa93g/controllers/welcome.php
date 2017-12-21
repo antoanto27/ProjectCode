@@ -24,10 +24,11 @@ class Welcome extends CI_Controller
 			$data['user_id']	= $this->tank_auth->get_user_id();
 			$data['username']	= $this->tank_auth->get_username();
 			$data['title']		= 'Welcome';
-			
 			$this->load->view('templates/header', $data);
 			$this->load->view('welcome', $data);
 			$this->load->view('templates/footer', $data);
+			echo ($this->data);
+			
 		}
 	}
 }

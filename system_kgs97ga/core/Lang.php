@@ -89,7 +89,7 @@ class CI_Lang {
 		// Determine where the language file is and load it
 		if ($alt_path != '' && file_exists($alt_path.'language/'.$idiom.'/'.$langfile))
 		{
-			include($alt_path.'language/'.$idiom.'/'.$langfile);
+			include $alt_path.'language/'.$idiom.'/'.$langfile;
 		}
 		else
 		{
@@ -97,9 +97,9 @@ class CI_Lang {
 
 			foreach (get_instance()->load->get_package_paths(TRUE) as $package_path)
 			{
-				if (file_exists($package_path.'language/'.$idiom.'/'.$langfile))
+				if (file_exists $package_path.'language/'.$idiom.'/'.$langfile)
 				{
-					include($package_path.'language/'.$idiom.'/'.$langfile);
+					include $package_path.'language/'.$idiom.'/'.$langfile;
 					$found = TRUE;
 					break;
 				}

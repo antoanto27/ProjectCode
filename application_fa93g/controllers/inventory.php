@@ -96,9 +96,15 @@
 								if(count($there) > 0)
 								{
 									echo "<div class='alert alert-error fade in'>";
-									echo "<button type='button' class='close' data-dismiss='alert'>&times;</button><strong>Oh Snap! </strong>";
+									$str=<<<HTML
+										<button type='button' class='close' data-dismiss='alert'>&times;</button><strong>Oh Snap! </strong>
+HTML;
+									echo $str;
 									echo "The data you tried to enter already exist in the database.";
-									echo "!</div>\n";
+									$str1=<<<HTML
+										!</div>\n
+HTML;
+									echo $str1;
 									die();
 								}								
 									// Everything is good!
@@ -112,9 +118,15 @@
 									foreach( $errors as $error )
 									{
 											echo "<div class='alert alert-error fade in'>";
-											echo "<button type='button' class='close' data-dismiss='alert'>&times;</button><strong>Oh Snap! </strong>";
+											$str=<<<HTML
+												<button type='button' class='close' data-dismiss='alert'>&times;</button><strong>Oh Snap! </strong>
+HTML;
+											echo $str;
 											echo $error;
-											echo "!</div>\n";
+											$str1=<<<HTML
+												!</div>\n
+HTML;
+										echo $str1;
 									}
 									// Stop operation.
 									break;								
@@ -159,9 +171,15 @@
 							if($dbGood == 1)
 							{
 									echo "<div class='alert alert-success fade in'>";
-									echo "<button type='button' class='close' data-dismiss='alert'>&times;</button><strong>Well Done! </strong>";
+									$str=<<<HTML
+										<button type='button' class='close' data-dismiss='alert'>&times;</button><strong>Well Done! </strong>
+HTML;
+								echo $str;
 									echo "All inventory successfully inserted into the database!";
-									echo "!</div>\n";
+									$str1=<<<HTML
+										!</div>\n
+HTML;
+								echo $str1;
 							}
 							
 					}

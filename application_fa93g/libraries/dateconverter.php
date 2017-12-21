@@ -7,7 +7,7 @@
 			
 		}
 		
-		private $bs = array(
+		const bs = array(
 			0=>array(2000,30,32,31,32,31,30,30,30,29,30,29,31),
 			1=>array(2001,31,31,32,31,31,31,30,29,30,29,30,30),
 			2=>array(2002,31,31,32,32,31,30,30,29,30,29,30,30),
@@ -391,7 +391,7 @@
 		
 		
 		/**
-		 * currently can only calculate the date between BS 2000-2089
+		 * currently can only calculate the date between bs 2000-2089
 		 *
 		 * @param unknown_type $yy
 		 * @param unknown_type $mm
@@ -401,7 +401,7 @@
 		public function nep_to_eng($yy,$mm,$dd){
 			
 			$def_eyy = 1943	; $def_emm=4 ; $def_edd=14-1;		// init english date.
-			$def_nyy = 2000; $def_nmm = 1; $def_ndd = 1;		// equivalent nepali date.
+			//$def_nyy = 2000; $def_nmm = 1; $def_ndd = 1;		// equivalent nepali date.
 			$total_eDays=0; $total_nDays=0; $a=0; $day=4-1;		// initializations...
 			$m = 0; $y = 0; $i=0;
 			$k = 0;	$numDay = 0;

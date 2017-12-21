@@ -228,7 +228,7 @@ class Users extends CI_Model
 	 * @param	int
 	 * @return	void
 	 */
-	function can_reset_password($user_id, $new_pass_key, $expire_period = 900)
+	function can_reset_password_users($user_id, $new_pass_key, $expire_period = 900)
 	{
 		$this->db->select('1', FALSE);
 		$this->db->where('id', $user_id);
@@ -248,7 +248,7 @@ class Users extends CI_Model
 	 * @param	int
 	 * @return	bool
 	 */
-	function reset_password($user_id, $new_pass, $new_pass_key, $expire_period = 900)
+	function reset_password_users($user_id, $new_pass, $new_pass_key, $expire_period = 900)
 	{
 		$this->db->set('password', $new_pass);
 		$this->db->set('new_password_key', NULL);
@@ -287,7 +287,7 @@ class Users extends CI_Model
 	 * @param	bool
 	 * @return	bool
 	 */
-	function set_new_email($user_id, $new_email, $new_email_key, $activated)
+	function set_new_email_users($user_id, $new_email, $new_email_key, $activated)
 	{
 		$this->db->set($activated ? 'new_email' : 'email', $new_email);
 		$this->db->set('new_email_key', $new_email_key);

@@ -79,9 +79,11 @@ class CI_Input {
 	 * Sets whether to globally enable the XSS processing
 	 * and whether to allow the $_GET array
 	 *
+	 * Edit: Global variable passed as parameters
+	 *
 	 * @return	void
 	 */
-	public function __construct()
+	public function __construct($SEC=null, $UNI=null)
 	{
 		log_message('debug', "Input Class Initialized");
 
@@ -89,13 +91,13 @@ class CI_Input {
 		$this->_enable_xss		= (config_item('global_xss_filtering') === TRUE);
 		$this->_enable_csrf		= (config_item('csrf_protection') === TRUE);
 
-		global $SEC;
+		
 		$this->security =& $SEC;
 
 		// Do we need the UTF-8 class?
 		if (UTF8_ENABLED === TRUE)
 		{
-			global $UNI;
+			
 			$this->uni =& $UNI;
 		}
 
@@ -571,14 +573,14 @@ class CI_Input {
 
 		// Unset globals for securiy.
 		// This is effectively the same as register_globals = off
-		foreach (array($_GET, $_POST, $_COOKIE) as $global)
+		$global=array($_GET, $_POST, $_COOKIE);
+		for($counterloop; $counterloop<3; $counterloop++)
 		{
 			if ( ! is_array($global))
 			{
 				if ( ! in_array($global, $protected))
 				{
-					global $$global;
-					$$global = NULL;
+					$$global[counterloop]=null;
 				}
 			}
 			else
@@ -587,8 +589,7 @@ class CI_Input {
 				{
 					if ( ! in_array($key, $protected))
 					{
-						global $$key;
-						$$key = NULL;
+						$$key[counterloop]=null;
 					}
 				}
 			}
@@ -761,7 +762,9 @@ class CI_Input {
 		}
 		else
 		{
-			$headers['Content-Type'] = (isset($_SERVER['CONTENT_TYPE'])) ? $_SERVER['CONTENT_TYPE'] : @getenv('CONTENT_TYPE');
+			$headers['Content-Type'] = (isset($_SERVER['CONTENT_TYPE'])) ? $_SERVER['CONTENT_TYPE'] :
+			error_reporting(0);
+			getenv('CONTENT_TYPE');
 
 			foreach ($_SERVER as $key => $val)
 			{

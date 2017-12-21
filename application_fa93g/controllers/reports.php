@@ -242,7 +242,12 @@
 											<tr>
 													<td><?php echo $i; ?></td>
 													<td><?php echo $inventory['code']; ?></td>
-													<td><?php echo "<u>" . $inventory['customer']['name'] . "</u><br>Code: " . $inventory['customer']['code']  . "<br>Reg No.: " . $inventory['customer']['reg_number'] . "<br>Alternate ID: " . $inventory['customer']['alternate_id'] . "<br>Type: " . $inventory['customer']['type']; ?></td>
+													<td><?php 
+						$str3= <<<HTML
+						<u>  {$inventory['customer']['name']}  </u><br>Code:   {$inventory['customer']['code']} <br>Reg No.:  {$inventory['customer']['reg_number']}  <br>Alternate ID:  . {$inventory['customer']['alternate_id']} <br>Type:  {$inventory['customer']['type']}
+HTML;
+						echo($str3);
+							?></td>
 													<td style='text-align: right;'>रू <?php echo $inventory['sp']; ?></td>
 													<td style='text-align: right;'><?php echo $inventory['quantity']; ?></td>
 													<td style='text-align: right;'>रू <?php echo $inventory['sp'] * $inventory['quantity']; ?></td>
@@ -406,7 +411,7 @@
 					{
 							$refueling['vehicle'] = $this->sharedDB_model->get('vehicles', array('id', 'name', 'vehicle_number', 'fuel_capacity'), array('id' => $refueling['vehicle']));
 							$refueling['vehicle'] = $refueling['vehicle'][0];
-							$refuelingDate = explode('-', $refueling['date']);
+							//$refuelingDate = explode('-', $refueling['date']);
 							$refueling['date_exact'] = $refueling['date'];
 							$refueling['date'] = date('D, j M, Y', $refueling['date']);
 							$refueling['date_nepali'] = $this->dateconverter->eng_to_nep(date('Y', $refueling['date_exact']), date('m', $refueling['date_exact']), date('j', $refueling['date_exact']));

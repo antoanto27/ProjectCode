@@ -1,4 +1,5 @@
-<?php		
+<?php	
+class non_utilizzata{
 		public function __construct(){
 			$this->load->database();
 			$this->load->helper('date');
@@ -17,9 +18,12 @@
 		public function insert($data){
 			$data['added_on'] = now();
 			$data['identification'] = $this->input->ip_address() . ", " . $this->agent->agent_string();
-			return $this->db->insert( $this->tableName, $data ); 
+			return $this->db->insert_sharedDB_model( $this->tableName, $data ); 
 		}
 		
 		public function update($data, $condition){
-			return $this->db->update( $this->tableName, $data, $condition);
+			return $this->db->update_sharedDB_model( $this->tableName, $data, $condition);
 		}
+}
+?>
+

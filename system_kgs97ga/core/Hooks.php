@@ -82,11 +82,11 @@ class CI_Hooks {
 
 		if (defined('ENVIRONMENT') AND is_file(APPPATH.'config/'.ENVIRONMENT.'/hooks.php'))
 		{
-		    include(APPPATH.'config/'.ENVIRONMENT.'/hooks.php');
+		    include APPPATH.'config/'.ENVIRONMENT.'/hooks.php';
 		}
 		elseif (is_file(APPPATH.'config/hooks.php'))
 		{
-			include(APPPATH.'config/hooks.php');
+			include APPPATH.'config/hooks.php';
 		}
 
 
@@ -220,7 +220,7 @@ class CI_Hooks {
 		{
 			if ( ! class_exists($class))
 			{
-				require($filepath);
+				require $filepath;
 			}
 
 			$HOOK = new $class;
@@ -230,7 +230,7 @@ class CI_Hooks {
 		{
 			if ( ! function_exists($function))
 			{
-				require($filepath);
+				require $filepath;
 			}
 
 			$function($params);

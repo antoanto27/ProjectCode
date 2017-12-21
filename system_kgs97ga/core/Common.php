@@ -72,29 +72,34 @@ if ( ! function_exists('is_really_writable'))
 	function is_really_writable($file)
 	{
 		// If we're on a Unix server with safe_mode off we call is_writable
-		if (DIRECTORY_SEPARATOR == '/' AND @ini_get("safe_mode") == FALSE)
+		error_reporting(0);
+		if (DIRECTORY_SEPARATOR == '/' AND ini_get("safe_mode") == FALSE)
 		{
 			return is_writable($file);
 		}
 
 		// For windows servers and safe_mode "on" installations we'll actually
 		// write a file then read it.  Bah...
+		error_reporting(0);
 		if (is_dir($file))
 		{
 			$file = rtrim($file, '/').'/'.md5(mt_rand(1,100).mt_rand(1,100));
-
-			if (($fp = @fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
+			error_reporting(0);
+			if (($fp = fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
 			{
 				return FALSE;
 			}
 
 			fclose($fp);
-			@chmod($file, DIR_WRITE_MODE);
-			@unlink($file);
+			error_reporting(0);
+			chmod($file, DIR_WRITE_MODE);
+			unlink($file);
 			return TRUE;
 		}
-		elseif ( ! is_file($file) OR ($fp = @fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
+		
+		elseif ( ! is_file($file) OR ($fp = fopen($file, FOPEN_WRITE_CREATE)) === FALSE)
 		{
+			
 			return FALSE;
 		}
 
@@ -150,13 +155,13 @@ if ( ! function_exists('load_class'))
 		}
 
 		// Is the request a class extension?  If so we load it too
-		if (file_exists(APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php'))
+		if (file_exists APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php')
 		{
 			$name = config_item('subclass_prefix').$class;
 
 			if (class_exists($name) === FALSE)
 			{
-				require(APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php');
+				require APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php';
 			}
 		}
 
@@ -234,7 +239,7 @@ if ( ! function_exists('get_config'))
 			exit('The configuration file does not exist.');
 		}
 
-		require($file_path);
+		require $file_path;
 
 		// Does the $config array exist in the file?
 		if ( ! isset($config) OR ! is_array($config))
@@ -306,7 +311,7 @@ if ( ! function_exists('show_error'))
 	function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
 	{
 		$_error =& load_class('Exceptions', 'core');
-		echo $_error->show_error($heading, $message, 'error_general', $status_code);
+		echo $_error->show_error_exception($heading, $message, 'error_general', $status_code);
 		exit;
 	}
 }
@@ -484,7 +489,7 @@ if ( ! function_exists('_exception_handler'))
 		// level and add its bits with the severity bits to find out.
 		if (($severity & error_reporting()) == $severity)
 		{
-			$_error->show_php_error($severity, $message, $filepath, $line);
+			$_error->show_php_error($severity,$filepath,$message,$line);
 		}
 
 		// Should we log the error?  No?  We're done...

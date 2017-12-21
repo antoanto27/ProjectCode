@@ -18,14 +18,14 @@
 			return $query->result_array();
 		}
 		
-		public function insert($tableName, $data)
+		public function insert_sharedDB_model($tableName, $data)
 		{
 			$data['added_on'] = now();
 			$data['identification'] = $this->input->ip_address() . ", " . $this->agent->agent_string();
 			return $this->db->insert( $tableName, $data ); 
 		}
 		
-		public function update($tableName, $data, $condition)
+		public function update_sharedDB_model($tableName, $data, $condition)
 		{
 			return $this->db->update( $tableName, $data, $condition);
 		}

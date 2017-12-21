@@ -48,7 +48,7 @@
  *  Load the global functions
  * ------------------------------------------------------
  */
-	require(BASEPATH.'core/Common.php');
+	require BASEPATH.'core/Common.php';
 
 /*
  * ------------------------------------------------------
@@ -57,11 +57,11 @@
  */
 	if (defined('ENVIRONMENT') AND file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
 	{
-		require(APPPATH.'config/'.ENVIRONMENT.'/constants.php');
+		require APPPATH.'config/'.ENVIRONMENT.'/constants.php';
 	}
 	else
 	{
-		require(APPPATH.'config/constants.php');
+		require APPPATH.'config/constants.php';
 	}
 
 /*
@@ -73,7 +73,8 @@
 
 	if ( ! is_php('5.3'))
 	{
-		@set_magic_quotes_runtime(0); // Kill magic quotes
+		error_reporting(0);
+		set_magic_quotes_runtime(0); // Kill magic quotes
 	}
 
 /*
@@ -102,9 +103,11 @@
  *  Set a liberal script execution time limit
  * ------------------------------------------------------
  */
-	if (function_exists("set_time_limit") == TRUE AND @ini_get("safe_mode") == 0)
+error_reporting(0);
+	if (function_exists("set_time_limit") == TRUE AND ini_get("safe_mode") == 0)
 	{
-		@set_time_limit(300);
+		error_reporting(0);
+		set_time_limit(300);
 	}
 
 /*
@@ -247,7 +250,7 @@
 		show_error('Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.');
 	}
 
-	include(APPPATH.'controllers/'.$RTR->fetch_directory().$RTR->fetch_class().'.php');
+	include APPPATH.'controllers/'.$RTR->fetch_directory().$RTR->fetch_class().'.php';
 
 	// Set a mark point for benchmarking
 	$BM->mark('loading_time:_base_classes_end');
@@ -281,7 +284,7 @@
 					show_404("{$class}/{$method}");
 				}
 
-				include_once(APPPATH.'controllers/'.$class.'.php');
+				include_once APPPATH.'controllers/'.$class.'.php';
 			}
 		}
 		else
@@ -343,7 +346,7 @@
 						show_404("{$class}/{$method}");
 					}
 
-					include_once(APPPATH.'controllers/'.$class.'.php');
+					include_once APPPATH.'controllers/'.$class.'.php';
 					unset($CI);
 					$CI = new $class();
 				}

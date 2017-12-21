@@ -27,6 +27,7 @@ class Auth extends CI_Controller
 	 *
 	 * @return void
 	 */
+	
 	function login()
 	{
 		if ($this->tank_auth->is_logged_in()) {									// logged in
@@ -62,7 +63,7 @@ class Auth extends CI_Controller
 			$data['errors'] = array();
 
 			if ($this->form_validation->run()) {								// validation ok
-				if ($this->tank_auth->login(
+				if ($this->tank_auth->login_1(
 						$this->form_validation->set_value('login'),
 						$this->form_validation->set_value('password'),
 						$this->form_validation->set_value('remember'),
@@ -116,7 +117,7 @@ class Auth extends CI_Controller
 	function register()
 	{
 		$this->load->helper('permission_manager');
-		$a = permission_manager();
+		//$a = permission_manager();
 
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 			//redirect('');
@@ -258,7 +259,7 @@ class Auth extends CI_Controller
 	 *
 	 * @return void
 	 */
-	function forgot_password()
+	function forgot_password($password)
 	{
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 			redirect('');
@@ -298,7 +299,7 @@ class Auth extends CI_Controller
 	 *
 	 * @return void
 	 */
-	function reset_password()
+	function reset_password($user_id, $new_pass_key, $new_password)
 	{
 		$user_id		= $this->uri->segment(3);
 		$new_pass_key	= $this->uri->segment(4);
@@ -341,7 +342,7 @@ class Auth extends CI_Controller
 	 *
 	 * @return void
 	 */
-	function change_password()
+	function change_password($old_password, $new_password, $message_password)
 	{
 		if (!$this->tank_auth->is_logged_in()) {								// not logged in or not activated
 			redirect('/auth/login/');
@@ -380,7 +381,7 @@ class Auth extends CI_Controller
 	 *
 	 * @return void
 	 */
-	function change_email()
+	function change_email($email)
 	{
 		if (!$this->tank_auth->is_logged_in()) {								// not logged in or not activated
 			redirect('/auth/login/');

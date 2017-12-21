@@ -8,7 +8,7 @@
 			$this->load->library('user_agent');
 		}
 		
-		public function autocomplete_customer($searchTerm)
+		public function autocomplete_customer_t($searchTerm)
 		{
 			$this->db->select(array('name', 'reg_number', 'alternate_id', 'type'));
 			$this->db->like('name', $searchTerm);
@@ -19,7 +19,7 @@
 			return $query->result_array();
 		}
 		
-		public function autocomplete_inventory($searchTerm)
+		public function autocomplete_inventory_t($searchTerm)
 		{
 				$this->db->select('inventory.name, stock.quantity');
 				$this->db->from('inventory');

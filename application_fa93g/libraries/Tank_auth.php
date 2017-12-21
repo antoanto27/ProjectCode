@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('phpass-0.1/PasswordHash.php');
+require_once 'phpass-0.1/PasswordHash.php';
 
 define('STATUS_ACTIVATED', '1');
 define('STATUS_NOT_ACTIVATED', '0');
@@ -43,7 +43,7 @@ class Tank_auth
 	 * @param	bool
 	 * @return	bool
 	 */
-	function login($login, $password, $remember, $login_by_username, $login_by_email)
+	function login_1($login, $password, $remember, $login_by_username, $login_by_email)
 	{
 		if ((strlen($login) > 0) AND (strlen($password) > 0)) {
 
@@ -272,7 +272,7 @@ class Tank_auth
 
 			} elseif ($this->ci->users->is_email_available($email)) {
 				$data['new_email_key'] = md5(rand().microtime());
-				$this->ci->users->set_new_email($user_id, $email, $data['new_email_key'], FALSE);
+				$this->ci->users->set_new_email_users($user_id, $email, $data['new_email_key'], FALSE);
 				return $data;
 
 			} else {
@@ -340,7 +340,7 @@ class Tank_auth
 	function can_reset_password($user_id, $new_pass_key)
 	{
 		if ((strlen($user_id) > 0) AND (strlen($new_pass_key) > 0)) {
-			return $this->ci->users->can_reset_password(
+			return $this->ci->users->can_reset_password_users(
 				$user_id,
 				$new_pass_key,
 				$this->ci->config->item('forgot_password_expire', 'tank_auth'));
@@ -368,7 +368,7 @@ class Tank_auth
 						$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
 				$hashed_password = $hasher->HashPassword($new_password);
 
-				if ($this->ci->users->reset_password(
+				if ($this->ci->users->reset_password_users(
 						$user_id,
 						$hashed_password,
 						$new_pass_key,
@@ -459,7 +459,7 @@ class Tank_auth
 
 				} elseif ($this->ci->users->is_email_available($new_email)) {
 					$data['new_email_key'] = md5(rand().microtime());
-					$this->ci->users->set_new_email($user_id, $new_email, $data['new_email_key'], TRUE);
+					$this->ci->users->set_new_email_users($user_id, $new_email, $data['new_email_key'], TRUE);
 					return $data;
 
 				} else {

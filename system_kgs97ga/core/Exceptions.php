@@ -132,18 +132,19 @@ class CI_Exceptions {
 	 * @param 	int		the status code
 	 * @return	string
 	 */
-	function show_error($heading, $message, $template = 'error_general', $status_code = 500)
+	function show_error_exception($heading, $message, $template = 'error_general', $status_code = 500)
 	{
 		set_status_header($status_code);
 
-		$message = '<p>'.implode('</p><p>', ( ! is_array($message)) ? array($message) : $message).'</p>';
+		$message = '<p>'.implode('</p><p>', ( ! is_array($message)) ? array($message) : $message).'</p>'.
+		'<p>'.implode('</p><p>', ( ! is_array($heading)) ? array($heading) : $heading).'</p>';
 
 		if (ob_get_level() > $this->ob_level + 1)
 		{
 			ob_end_flush();
 		}
 		ob_start();
-		include(APPPATH.'errors/'.$template.'.php');
+		include APPPATH.'errors/'.$template.'.php';
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		return $buffer;
@@ -161,7 +162,7 @@ class CI_Exceptions {
 	 * @param	string	the error line number
 	 * @return	string
 	 */
-	function show_php_error($severity, $message, $filepath, $line)
+	function show_php_error($severity,$filepath,$message='',$line='')
 	{
 		$severity = ( ! isset($this->levels[$severity])) ? $severity : $this->levels[$severity];
 
@@ -179,7 +180,7 @@ class CI_Exceptions {
 			ob_end_flush();
 		}
 		ob_start();
-		include(APPPATH.'errors/error_php.php');
+		include APPPATH.'errors/error_php.php';
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		echo $buffer;

@@ -426,7 +426,7 @@ class Gump_validation
 	 * @param  array $params
 	 * @return string
 	 */
-	protected function filter_noise_words($value, $params = NULL)
+	protected function filter_noise_words($value)
 	{
 		$value = preg_replace('/\s\s+/u', chr(32),$value);
 		
@@ -459,7 +459,7 @@ class Gump_validation
 	 * @param  array $params
 	 * @return string
 	 */
-	protected function filter_rmpunctuation($value, $params = NULL)
+	protected function filter_rmpunctuation($value)
 	{
 		return preg_replace("/(?![.=$'€%-])\p{P}/u", '', $value);
 	}
@@ -527,7 +527,7 @@ class Gump_validation
 	 * @param  array $params
 	 * @return string
 	 */
-	protected function filter_sanitize_string($value, $params = NULL)
+	protected function filter_sanitize_string($value)
 	{
 		return filter_var($value, FILTER_SANITIZE_STRING);
 	}
@@ -542,7 +542,7 @@ class Gump_validation
 	 * @param  array $params	
 	 * @return string
 	 */
-	protected function filter_urlencode($value, $params = NULL)
+	protected function filter_urlencode($value)
 	{
 		return filter_var($value, FILTER_SANITIZE_ENCODED);  
 	}
@@ -557,7 +557,7 @@ class Gump_validation
 	 * @param  array $params
 	 * @return string
 	 */
-	protected function filter_htmlencode($value, $params = NULL)
+	protected function filter_htmlencode($value)
 	{
 		return filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);  
 	}
@@ -572,7 +572,7 @@ class Gump_validation
 	 * @param  array $params
 	 * @return string
 	 */
-	protected function filter_sanitize_email($value, $params = NULL)
+	protected function filter_sanitize_email($value)
 	{
 		return filter_var($value, FILTER_SANITIZE_EMAIL);  
 	}
@@ -585,7 +585,7 @@ class Gump_validation
 	 * @param  array $params
 	 * @return string
 	 */
-	protected function filter_sanitize_numbers($value, $params = NULL)
+	protected function filter_sanitize_numbers($value)
 	{
 		return filter_var($value, FILTER_SANITIZE_NUMBER_INT);  
 	}
@@ -598,7 +598,7 @@ class Gump_validation
 	 * @param  array $params
 	 * @return string
 	 */	
-	protected function filter_basic_tags($value, $params = NULL)
+	protected function filter_basic_tags($value)
 	{
 		return strip_tags($value, self::$basic_tags);
 	}

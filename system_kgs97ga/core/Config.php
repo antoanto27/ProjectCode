@@ -127,7 +127,7 @@ class CI_Config {
 				continue;
 			}
 
-			include($file_path);
+			include $file_path;
 
 			if ( ! isset($config) OR ! is_array($config))
 			{
