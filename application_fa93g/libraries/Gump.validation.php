@@ -349,6 +349,9 @@ class Gump_validation
 				case 'validate_street_address':
 					$resp[] = "The <span class=\"$field_class\">$field</span> field needs to be a valid street address";
 					break;
+				default:
+					trigger_error('Unrecognized error');
+					break;
 			}
 		}		
 		

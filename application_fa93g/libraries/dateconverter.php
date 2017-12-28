@@ -185,6 +185,9 @@
 				case 12:
 					$n_month = "Chaitra";
 					break;
+				default:
+					trigger_error('Switch case error');
+					break;
 			}	
 			return  $n_month;
 		}
@@ -227,6 +230,10 @@
 					break;
 				case 12:
 					$eMonth = "December";
+					break;
+				default:
+					trigger_error('Switch case error');
+					break;
 			}
 			return $eMonth;	
 		}
@@ -259,6 +266,9 @@
 				
 				case 7:
 					$day = "Saturday";
+					break;
+				default:
+					trigger_error('Switch case error');
 					break;
 			}
 			return $day;
